@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCH</title>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+
+</head>
+
+<body>
+
+    <div id="main-content">
+
+        <div class="row my-2">
+            <div class="col-12">
+                <h1 class="title">WISTORY</h1>
+            </div>
+        </div>
+
+        <!-- ÚLTIMOS PERSONAJES -->
+        <div class="row my-2">
+            <div class="col-12">
+                <h3>Últimos personajes añadidos</h3>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-around">
+            <div class="col-2">
+                <div class="card-item">
+                    <div class="content">
+                        <h2 class="title">Fernando II de Aragón</h2>
+                        <a href="#" class="btn-card">Ver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card-item">
+                    <div class="content">
+                        <h2 class="title">Persona</h2>
+                        <a href="#" class="btn-card">Ver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card-item">
+                    <div class="content">
+                        <h2 class="title">Persona</h2>
+                        <a href="#" class="btn-card">Ver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card-item">
+                    <div class="content">
+                        <h2 class="title">Persona</h2>
+                        <a href="#" class="btn-card">Ver</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ÚLTIMOS HECHOS-->
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
+
+        <!-- INFO DEVELOPER -->
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img class="img-fluid" src="" alt="">
+                </a>
+
+                
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                
+            </div>
+        </nav>
+
+
+
+    </div>
+    <nav id="sidebar" class="collapsed">
+        <h3>Filtro de búsqueda</h3>
+
+        <button class="btn">Aplicar</button>
+        <button class="btn" disabled>Limpiar</button>
+
+        <input type="text" name="persona" id="" placeholder="persona"><button class="ayuda_busq">X</button>
+        <input type="text" name="evento" id="" placeholder="Evento"><button class="ayuda_busq">X</button>
+        <input type="text" name="dinastia" id="" placeholder="Dinastia"><button class="ayuda_busq">X</button>
+
+        <h4>Cargos</h4>
+        <div class="lista-checkbox">
+            <input type="checkbox" name="" id="rey">
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+            <label for="rey">Rey</label>
+        </div>
+
+        <h4>Tipo de Evento</h4>
+        <div class="lista-checkbox">
+            <input type="checkbox" name="" id="rey">
+            <label for="rey">Guerra</label>
+            <label for="rey">Batalla</label>
+            <label for="rey">Boda</label>
+            <label for="rey">Rey</label>
+
+        </div>
+
+
+    </nav>
+
+
+    <button id="btn">
+        <i class="fas fa-chevron-right fa-lg"></i>
+    </button>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+    <script>
+       
+       // Abrir y cerrar el sidebar
+       $('#btn').click(function () {
+            if ($('#sidebar').hasClass('collapsed')) {   // Abrir menú
+
+                $('#sidebar').removeClass('collapsed');
+                document.getElementById("sidebar").style.width = "400px";
+                document.getElementById("main-content").style.marginRight = '432px';
+                document.getElementById("btn").style.marginRight = "400px";
+
+                //Cambia icono del botón
+                $(this).children().removeClass("fa-chevron-right").addClass("fa-chevron-left");
+
+                // Cambia el tamaño de las tarjetas
+                $(".card-item").parent().removeClass('col-2').addClass('col-3');
+
+            } else {    //Cerrar menú
+
+                $('#sidebar').addClass('collapsed');
+                document.getElementById("sidebar").style.width = "0";
+                document.getElementById("main-content").style.marginRight = "0";
+                document.getElementById("btn").style.marginRight = "0";
+
+                //Cambia icono del botón
+                $(this).children().removeClass("fa-chevron-left").addClass("fa-chevron-right");
+
+                // Cambia el tamaño de las tarjetas
+                $(".card-item").parent().removeClass('col-3').addClass('col-2');
+
+
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
