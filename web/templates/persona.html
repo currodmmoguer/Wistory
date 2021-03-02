@@ -1,132 +1,155 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/card.css' %}">
-    <link rel="stylesheet" href="{% static 'css/search.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-</head>
-<body>
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <!-- IMG -->
-            <div class="col-3">
-                <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Michel_Sittow_004.jpg/245px-Michel_Sittow_004.jpg" alt="">
-            </div>
-
-            <!-- INFO -->
-            <div class="col-7">
-                
-                <!-- NOMBRE -->
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Fernado II de Aragón</h2>
-                    </div>
-                </div>
-                
-                <!-- FECHAS -->
-                <div class="row">
-                    <div class="col-12">
-                        <p>20 de Enero de 1479 - 23 de Enero de 1516</p>
-                    </div>
-                </div>
-
-                <!-- CARGO -->
-                <div class="row">
-                    <div class="col-12">
-                        <p>Rey de Castilla y Aragón</p>
-                    </div>
-                </div>
-
-                <!-- DINASTÍA -->
-                <div class="row">
-                    <div class="col-12">
-                        <p>Casa de Aragón</p>
-                    </div>
-                </div>
-
-                <!-- PADRE -->
-                <div class="row">
-                    <div class="col-12">
-                        <p><b>Padre: </b>Juan II de Aragón</p>
-                    </div>
-                </div>
-
-                <!-- MADRE -->
-                <div class="row">
-                    <div class="col-12">
-                        <p><b>Madre: </b>Juana Enriquez</p>
-                    </div>
-                </div>
-
-                <!-- Mas información -->
-                <div class="row">
-                    <div class="col-12">
-                        <a href="https://es.wikipedia.org/wiki/Fernando_II_de_Arag%C3%B3n" target="_blank">Más información</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-        <!-- DESCRIPCIÓN -->
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <p>Fernando II de Aragón, llamado «el Católico» (Sos, 10 de marzo de 1452-Madrigalejo, 23 de enero de 1516),9​10​ fue rey de Aragón (1479-1516), de Castilla (como Fernando V, 1474-1504),11​ de Sicilia (como Fernando II, 1468-1516), de Nápoles (como Fernando III, 1504-1516), de Cerdeña (como Fernando II, 1479-1516) y de Navarra (como Fernando I, 1512-1515). Fue además regente de la Corona castellana entre 1507 y 1516, debido a la inhabilitación de su hija Juana I, tras la muerte de Felipe el Hermoso. </p>
-            </div>
-        </div>
-
-        <!-- PERSONAJES RELACIONADOS -->
-
-        <div class="row my-2">
-            <div class="col-12">
-                <h3>Personajes relacionados</h3>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-around">
-            <div class="col-2">
-                <div class="card-item">
-                    <div class="content">
-                        <h2 class="title">Fernando II de Aragón</h2>
-                        <a href="#" class="btn-card">Ver</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="card-item">
-                    <div class="content">
-                        <h2 class="title">Persona</h2>
-                        <a href="#" class="btn-card">Ver</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="card-item">
-                    <div class="content">
-                        <h2 class="title">Persona</h2>
-                        <a href="#" class="btn-card">Ver</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="card-item">
-                    <div class="content">
-                        <h2 class="title">Persona</h2>
-                        <a href="#" class="btn-card">Ver</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/card.css' %}" />
     
-</body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row my-3">
+        <div class="col-12">
+          <h1 class="text-center">WISTORY</h1>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <!-- IMG -->
+        <div class="col-3">
+          <img
+            class="img-fluid"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Michel_Sittow_004.jpg/245px-Michel_Sittow_004.jpg"
+            alt=""
+          />
+        </div>
+
+        <!-- INFO -->
+        <div class="col-7">
+          <!-- NOMBRE -->
+          <div class="row">
+            <div class="col-12">
+              <h2>Fernado II de Aragón</h2>
+            </div>
+          </div>
+
+          <!-- FECHAS -->
+          <div class="row">
+            <div class="col-12">
+              <p>20 de Enero de 1479 - 23 de Enero de 1516</p>
+            </div>
+          </div>
+
+          <!-- CARGO -->
+          <div class="row">
+            <div class="col-12">
+              <p>Rey de Castilla y Aragón</p>
+            </div>
+          </div>
+
+          <!-- DINASTÍA -->
+          <div class="row">
+            <div class="col-12">
+              <p>Casa de Aragón</p>
+            </div>
+          </div>
+
+          <!-- PADRE -->
+          <div class="row">
+            <div class="col-12">
+              <p><b>Padre: </b>Juan II de Aragón</p>
+            </div>
+          </div>
+
+          <!-- MADRE -->
+          <div class="row">
+            <div class="col-12">
+              <p><b>Madre: </b>Juana Enriquez</p>
+            </div>
+          </div>
+
+          <!-- Mas información -->
+          <div class="row">
+            <div class="col-12">
+              <a
+                href="https://es.wikipedia.org/wiki/Fernando_II_de_Arag%C3%B3n"
+                target="_blank"
+                >Más información</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <!-- DESCRIPCIÓN -->
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <p>
+            Fernando II de Aragón, llamado «el Católico» (Sos, 10 de marzo de
+            1452-Madrigalejo, 23 de enero de 1516),9​10​ fue rey de Aragón
+            (1479-1516), de Castilla (como Fernando V, 1474-1504),11​ de Sicilia
+            (como Fernando II, 1468-1516), de Nápoles (como Fernando III,
+            1504-1516), de Cerdeña (como Fernando II, 1479-1516) y de Navarra
+            (como Fernando I, 1512-1515). Fue además regente de la Corona
+            castellana entre 1507 y 1516, debido a la inhabilitación de su hija
+            Juana I, tras la muerte de Felipe el Hermoso.
+          </p>
+        </div>
+      </div>
+
+      <!-- PERSONAJES RELACIONADOS -->
+
+      <div class="row my-2">
+        <div class="col-12">
+          <h3>Personajes relacionados</h3>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-around">
+        <div class="col-2">
+          <div class="card-item">
+            <div class="content">
+              <h2 class="title">Fernando II de Aragón</h2>
+              <a href="#" class="btn-card">Ver</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="card-item">
+            <div class="content">
+              <h2 class="title">Persona</h2>
+              <a href="#" class="btn-card">Ver</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="card-item">
+            <div class="content">
+              <h2 class="title">Persona</h2>
+              <a href="#" class="btn-card">Ver</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="card-item">
+            <div class="content">
+              <h2 class="title">Persona</h2>
+              <a href="#" class="btn-card">Ver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

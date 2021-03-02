@@ -1,0 +1,204 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="main-content" class="px-2">
+  <!-- ÚLTIMOS PERSONAJES -->
+  <div class="row my-2">
+    <div class="col-12">
+      <h3>Últimos personajes añadidos</h3>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-around">
+    <div class="col-2">
+      <div class="card-item">
+        <div class="content">
+          <h2 class="title">Fernando II de Aragón</h2>
+          <a href="{% url 'persona' %}" class="btn-card">Ver</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-item">
+        <div class="content">
+          <h2 class="title">Persona</h2>
+          <a href="{% url 'persona' %}" class="btn-card">Ver</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-item">
+        <div class="content">
+          <h2 class="title">Persona</h2>
+          <a href="#" class="btn-card">Ver</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-item">
+        <div class="content">
+          <h2 class="title">Persona</h2>
+          <a href="#" class="btn-card">Ver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav id="sidebar" class="collapsed">
+  <h3>Filtro de búsqueda</h3>
+
+  <button class="btn">Aplicar</button>
+  <button class="btn" disabled>Limpiar</button>
+
+  <input type="text" name="persona" id="" placeholder="persona" />
+  <button
+    type="button"
+    class="ayuda_busq"
+    data-toggle="modal"
+    data-target="#personaModal"
+  >
+    X
+  </button>
+  <input type="text" name="evento" id="" placeholder="Evento" /><button
+    class="ayuda_busq"
+  >
+    X
+  </button>
+  <input type="text" name="dinastia" id="" placeholder="Dinastia" /><button
+    class="ayuda_busq"
+  >
+    X
+  </button>
+
+  <h4>Cargos</h4>
+  <div class="lista-checkbox">
+    <input type="checkbox" name="" id="rey" class="check" />
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+    <label for="rey">Rey</label>
+  </div>
+
+  <h4>Tipo de Evento</h4>
+  <div class="lista-checkbox">
+    <input type="checkbox" name="" id="guerra" class="check" />
+    <label for="guerra">Guerra</label>
+    <label for="rey">Batalla</label>
+    <label for="rey">Boda</label>
+    <label for="rey">Rey</label>
+  </div>
+</nav>
+
+<button id="btn">
+  <i class="fas fa-chevron-right fa-lg"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="personaModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button id="buscar">Buscar</button>
+        <div class="form-group">
+          <label for="nombre" class="col-form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" />
+        </div>
+        <div class="form-group">
+          <label for="dinastia" class="col-form-label">Dinastía</label>
+          <input type="text" class="form-control" id="dinastia" />
+        </div>
+        <div class="form-group">
+          <label for="cargo" class="col-form-label">Cargo</label>
+          <input type="text" class="form-control" id="Cargo" />
+        </div>
+
+        <select name="" id="" >
+            <option value="a">a</option>
+            <option value="b">b</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Abrir y cerrar el sidebar
+  $("#btn").click(function () {
+    if ($("#sidebar").hasClass("collapsed")) {
+      // Abrir menú
+
+      $("#sidebar").removeClass("collapsed");
+      document.getElementById("sidebar").style.width = "400px";
+      document.getElementById("main-content").style.marginRight = "400px";
+      //   document.getElementById("main-content").style.width = "auto";
+      //   document.getElementById("main-content").style.removeProperty('width');
+      document.getElementById("btn").style.marginRight = "400px";
+
+      //Cambia icono del botón
+      $(this)
+        .children()
+        .removeClass("fa-chevron-right")
+        .addClass("fa-chevron-left");
+
+      // Cambia el tamaño de las tarjetas
+      $(".card-item").parent().removeClass("col-2").addClass("col-3");
+    } else {
+      //Cerrar menú
+
+      $("#sidebar").addClass("collapsed");
+      document.getElementById("sidebar").style.width = "0";
+      document.getElementById("main-content").style.marginRight = "auto";
+      document.getElementById("btn").style.marginRight = "0";
+
+      //Cambia icono del botón
+      $(this)
+        .children()
+        .removeClass("fa-chevron-left")
+        .addClass("fa-chevron-right");
+
+      // Cambia el tamaño de las tarjetas
+      $(".card-item").parent().removeClass("col-3").addClass("col-2");
+    }
+  });
+
+  // Ayuda de búsqueda
+
+  $('#buscar').click(function(){
+    $.ajax({
+        url: '{% url "busqueda_persona" %}',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+  });
+</script>
+
+{% endblock %}
