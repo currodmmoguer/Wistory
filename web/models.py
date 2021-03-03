@@ -75,6 +75,9 @@ class Persona_Cargo(models.Model):
         verbose_name = 'Relación persona y cargo'
         verbose_name_plural = 'Relaciones de personas y cargos'
 
+    def __str__(self):
+        return str(self.persona) + ' - ' + str(self.cargo)
+
 class Evento(models.Model):
     nombre = models.CharField(max_length=255)
     fecha_ini = models.DateField(null=True, blank=True, verbose_name='Fecha inicio')
