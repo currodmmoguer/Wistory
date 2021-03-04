@@ -3,18 +3,25 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from .models import *
-# from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 
 #Contains
 from django.db.models import Q
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    personas = Persona.objects.all()[:4]
+    eventos = Evento.objects.all()[:4]
+    data = {
+        'personas': personas,
+        'eventos': eventos,
+    }
+    return render(request, 'index.html', data)
 
 
-def persona(request):
-    return render(request, 'person.html', {})
+def persona(request, id):
+    persona = get_object_or_404(Persona, id=id)
+    return render(request, 'person.html', {'persona': persona})
 
 # AJAX
 
@@ -48,9 +55,17 @@ def get_personas(request):
     tmpObj = json.loads(tmpJson)
     return JsonResponse({'personas': tmpObj})
 
+def get_dinastias(request):
+    dic_dinastias = {}
+    dinastias = Dinastia.objects.filter(Q(nombre__icontains=request.GET['nombre']))
+
+    for dinastia in dinastias:
+        dic_dinastias[dinastia.pk] = dinastia.nombre
+
+    return JsonResponse(dic_dinastias)
 
 # Obtiene las dinastías a partir de una lista de IDs
-def get_dinastia(request):
+def get_dinastias_by_id(request):
     dic_dinastias = {}
     lista = dict(request.GET.lists())['id[]']
     
@@ -64,6 +79,7 @@ def get_dinastia(request):
 
     return JsonResponse(dic_dinastias)
 
+# Obtiene los cargos a partir de una lista de IDs
 def get_cargos(request):
     dic_cargos = {}
     lista = dict(request.GET.lists())['id[]']
@@ -77,3 +93,12 @@ def get_cargos(request):
     
     return JsonResponse(dic_cargos)
 
+# Obtiene los eventos a partir de un nombre
+def get_eventos(request):
+    dic_eventos = {}
+    eventos = Evento.objects.filter(nombre__in=request.GET['nombre'])
+    
+    for evento in eventos:
+        dic_eventos[evento.pk] = evento.nombre
+
+    return JsonResponse(dic_eventos)

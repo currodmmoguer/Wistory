@@ -1,147 +1,75 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-<div id="main-content" class="px-2">
-  <!-- ÚLTIMOS PERSONAJES -->
-  <div class="row my-2">
-    <div class="col-12">
-      <h3>Últimos personajes añadidos</h3>
-    </div>
-  </div>
-  <div class="row d-flex justify-content-around">
-    <div class="col-2">
-      <div class="card-item">
-        <div class="content">
-          <h2 class="title">Fernando II de Aragón</h2>
-          <a href="{% url 'persona' %}" class="btn-card">Ver</a>
-        </div>
+<head>
+  <meta name="url_get_personas" content="{% url 'get_personas' %}">
+  <meta name="url_get_dinastias_by_id" content="{% url 'get_dinastia_by_id' %}">
+  <meta name="url_get_dinastias" content="{% url 'get_dinastias' %}">
+  <meta name="url_get_cargos" content="{% url 'get_cargos' %}">
+  <meta name="url_get_eventos" content="{% url 'get_eventos' %}">
+</head>
+
+<!-- Modal ayuda búsqueda persona -->
+<div class="modal fade" id="personaModal" tabindex="-1" aria-labelledby="personaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Buscar persona</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-    <div class="col-2">
-      <div class="card-item">
-        <div class="content">
-          <h2 class="title">Persona</h2>
-          <a href="{% url 'persona' %}" class="btn-card">Ver</a>
+      <div class="modal-body">
+        <button id="buscar_persona">Buscar</button>
+        <div class="form-group">
+          <label for="modal_persona_nombre" class="col-form-label">Nombre</label>
+          <input type="text" class="form-control" id="modal_persona_nombre" />
         </div>
+        <div class="form-group">
+          <label for="modal_persona_dinastia" class="col-form-label">Dinastía</label>
+          <input type="text" class="form-control" id="modal_persona_dinastia" />
+        </div>
+        <div class="form-group">
+          <label for="modal_persona_cargo" class="col-form-label">Cargo</label>
+          <input type="text" class="form-control" id="modal_persona_cargo" />
+        </div>
+
+        <select name="" id="lista_personas" class="modal_select" size="5"></select>
       </div>
-    </div>
-    <div class="col-2">
-      <div class="card-item">
-        <div class="content">
-          <h2 class="title">Persona</h2>
-          <a href="#" class="btn-card">Ver</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card-item">
-        <div class="content">
-          <h2 class="title">Persona</h2>
-          <a href="#" class="btn-card">Ver</a>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" id="submit_ayuda_persona" data-dismiss="modal">
+          Guardar cambios
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<nav id="sidebar" class="collapsed">
-  <h3>Filtro de búsqueda</h3>
 
-  <form id="form_filter" action="#">
 
-  <button class="btn" type="submit">Aplicar</button>
-  <button class="btn" type="reset">Limpiar</button>
+<!-- Modal ayuda búsqueda EVENTO -->
 
-  <input
-    type="text"
-    name="persona"
-    id="persona_filter"
-    placeholder="persona"
-    data-id=""
-  />
-  <button
-    type="button"
-    class="ayuda_busq"
-    data-toggle="modal"
-    data-target="#personaModal"
-  >
-    X
-  </button>
-  <input
-    type="text"
-    name="evento"
-    id="evento_filter"
-    placeholder="Evento"
-  /><button class="ayuda_busq">X</button>
-  <input
-    type="text"
-    name="dinastia"
-    id="dinastia_filter"
-    placeholder="Dinastia"
-  /><button class="ayuda_busq">X</button>
-
-  <h4>Cargos</h4>
-  <div class="lista-checkbox">
-    <input type="checkbox" name="" id="rey" class="check" />
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-    <label for="rey">Rey</label>
-  </div>
-
-  <h4>Tipo de Evento</h4>
-  <div class="lista-checkbox">
-    <input type="checkbox" name="" id="guerra" class="check" />
-    <label for="guerra">Guerra</label>
-    <label for="rey">Batalla</label>
-    <label for="rey">Boda</label>
-    <label for="rey">Rey</label>
-  </div>
-</nav>
-</form>
-
-<button id="btn">
-  <i class="fas fa-chevron-right fa-lg"></i>
-</button>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="personaModal"
-  tabindex="-1"
-  aria-labelledby="personaModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="eventoModal" tabindex="-1" aria-labelledby="eventoModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Buscar persona</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <h5 class="modal-title" id="exampleModalLabel">Buscar evento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <button id="buscar">Buscar</button>
+        <button id="buscar_evento">Buscar</button>
         <div class="form-group">
-          <label for="modal_persona_nombre" class="col-form-label"
-            >Nombre</label
-          >
+          <label for="modal_persona_nombre" class="col-form-label">Nombre</label>
           <input type="text" class="form-control" id="modal_persona_nombre" />
         </div>
         <div class="form-group">
-          <label for="modal_persona_dinastia" class="col-form-label"
-            >Dinastía</label
-          >
+          <label for="modal_persona_dinastia" class="col-form-label">Dinastía</label>
           <input type="text" class="form-control" id="modal_persona_dinastia" />
         </div>
         <div class="form-group">
@@ -155,18 +83,154 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="submit_ayuda_persona"
-          data-dismiss="modal"
-        >
+        <button type="button" class="btn btn-primary" id="submit_ayuda_persona" data-dismiss="modal">
           Save changes
         </button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal ayuda búsqueda DINASTIA -->
+<div class="modal fade" id="dinastiaModal" tabindex="-1" aria-labelledby="dinastiaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Buscar dinastía</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button id="buscar_dinastia">Buscar</button>
+        <div class="form-group">
+          <label for="modal_dinastia_nombre" class="col-form-label">Nombre</label>
+          <input type="text" class="form-control" id="modal_dinastia_nombre" />
+        </div>
+
+
+        <div class="row">
+          <div class="col-5">
+            <select name="" id="lista_dinastias" class="modal_select" size="5" multiple></select>
+          </div>
+          <div class="col-2">
+            <button id="modal_add_dinastia">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button id="modal_remove_dinastia">
+              <i class="fas fa-trash"></i>
+            </button>
+            <button id="modal_add_all_dinastia">Add all</button>
+            <button id="modal_remove_all_dinastia">Remove all</button>
+          </div>
+          <div class="col-5">
+            <select name="" id="added_dinastias" class="modal_select" size="5" multiple></select>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" id="submit_ayuda_dinastia" data-dismiss="modal">
+          Guardar cambios
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="px-2">
+
+
+  <!-- ÚLTIMOS PERSONAJES -->
+  <div class="row my-2">
+    <div class="col-12">
+      <h3>Últimos personajes añadidos</h3>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-around">
+
+    {% for persona in personas %}
+    <div class="col-2">
+      <div class="card-item" style="background-image: url({{persona.img}})">
+        <div class="content">
+          <h2 class="title">{{persona.nombre}}</h2>
+          <a href="{% url 'persona' persona.pk %}" class="btn-card">Ver</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- ÚLTIMOS EVENTOS -->
+  <div class="row my-2">
+    <div class="col-12">
+      <h3>Últimos eventos añadidos</h3>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-around">
+
+    {% for evento in eventos %}
+    <div class="col-2">
+      <div class="card-item">
+        <div class="content">
+          <h2 class="title">{{evento.nombre}}</h2>
+          <a href="#" class="btn-card">Ver</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<div style="height: 5rem;"></div>
+
+<nav id="sidebar" class="collapsed">
+  <h3>Filtro de búsqueda</h3>
+
+  <form id="form_filter" action="#">
+
+    <button class="btn" type="submit">Aplicar</button>
+    <button class="btn" type="reset">Limpiar</button>
+
+    <input type="text" name="persona" id="persona_filter" placeholder="persona" data-id="" />
+    <button type="button" class="ayuda_busq" data-toggle="modal" data-target="#personaModal">
+      X
+    </button>
+
+
+    <input type="text" name="evento" id="evento_filter" placeholder="Evento" /><button type="button" class="ayuda_busq"
+      data-toggle="modal" data-target="#eventoModal">X</button>
+
+
+    <input type="text" name="dinastia" id="dinastia_filter" placeholder="Dinastia" /><button type="button"
+      class="ayuda_busq" data-toggle="modal" data-target="#dinastiaModal">X</button>
+    <input type="text" name="cargo" id="cargo_filter" placeholder="Cargo" /><button class="ayuda_busq">X</button>
+
+    <h4>Tipo de Evento</h4>
+    <div class="lista-checkbox">
+      <input type="checkbox" name="" id="guerra" class="check" />
+      <label for="guerra">Guerra</label>
+      <label for="rey">Batalla</label>
+      <label for="rey">Boda</label>
+      <label for="rey">Rey</label>
+    </div>
+</nav>
+</form>
+
+<button id="btn">
+  <i class="fas fa-chevron-right fa-lg"></i>
+</button>
+
+
 
 <script>
   // Abrir y cerrar el sidebar
@@ -208,9 +272,9 @@
     }
   });
 
-  $('#form_filter').on('submit', function(event) {
-   event.preventDefault();
-   // Búsqueda
+  $('#form_filter').on('submit', function (event) {
+    event.preventDefault();
+    // Búsqueda
   });
 
   // -----------------------------------------------------------------------------
@@ -218,154 +282,14 @@
   // Ayuda de búsqueda
 
   // Modal
-  let personas = [];
-  let dinastias = [];
-  let cargos = [];
-
-  $("#buscar").click(function () {
-    let lista_dinastias = [];
-    let lista_id_personas = [];
-    
-    let dic_personas = getPersonas();
-
-    // Crea la lista de objetos personas, dinastías
-    dic_personas["personas"].forEach((p) => {
-      personas.push(p); // Lista de objetos persona
-
-      // Añade los IDs de las dinastía a una lista
-      if (
-        lista_dinastias.indexOf(p["fields"]["dinastia"]) === -1 &&
-        p["fields"]["dinastia"]
-      ) {
-        lista_dinastias.push(p["fields"]["dinastia"]);
-      }
-
-      // Añade los IDs de las personas a una lista
-      if (lista_id_personas.indexOf(p.pk) === -1 && p.pk) {
-        lista_id_personas.push(p.pk);
-      }
-    });
-
-    // Obtiene las dinastias ({pk: nombre})
-    dinastias = getDinastia(lista_dinastias);
-    // Obtiene los cargos ({pk_persona: nombre_cargo})
-    cargos = getCargos(lista_id_personas);
-
-    // Añade los resultados a la lista
-    $("#lista_personas option").remove();
-
-    personas.forEach((p) => {
-      $("#lista_personas").append(
-        '<option value="' + p["pk"] + '">' + p["fields"]["nombre"] + "</option>"
-      );
-    });
-  });
-
-  // Cuando se clica un resultado se traspasa al campo persona
-  // NO FUNCIONA
-  // $("#lista_personas option").click(function () {
-  //   alert("Ljgulyhgkj")
-  //   persona = personas.find((p) => p.pk == this.value);
-  //   $("#modal_persona_nombre").val($(this).text());
-  //   $("#modal_persona_dinastia").val(dinastias[persona["fields"]["dinastia"]]);
-  //   $("#modal_persona_cargo").val(cargos[persona.pk]);
-  // });
-
-  $("#lista_personas").click(function () {
-    var opt = $(this).children().filter(function(){
-      return $(this)[0].selected;
-    });
-
-    persona = personas.find((p) => p.pk == opt[0].value);
-    $("#modal_persona_nombre").val(persona["fields"]["nombre"]);
-    $("#modal_persona_dinastia").val(dinastias[persona["fields"]["dinastia"]]);
-    $("#modal_persona_cargo").val(cargos[persona.pk]);
-    
-  });
-
-  $("#submit_ayuda_persona").click(function () {
-    $("#persona_filter").val($("#modal_persona_nombre").val());
-    $("#dinastia_filter").val($("#modal_persona_dinastia").val());
-  });
 
 
-  // Funciones
 
-  /**
-   * Obtiene los personajes a partir del formulario
-   */
-  function getPersonas() {
-    let personas = "";
-    let nombre = $("#modal_persona_nombre").val();
-    let dinastia = $("#modal_persona_dinastia").val();
-    let cargo = $("#modal_persona_cargo").val();
-    $.ajax({
-      url: '{% url "get_personas" %}',
-      cache: false,
-      async: false,
-      data: {
-        nombre: nombre,
-        dinastia: dinastia,
-        cargo: cargo,
-      },
-      success: function (data) {
-        personas = data;
-      },
-    });
-    return personas;
-  }
+</script>
 
-  /**
-   * Obtiene las dinastías a partir de una lista de IDs
-   * Devuelve un diccionario de datos con formato: {pk: nombre}
-   * @param {Array} id - Lista de IDs
-   * @return {Json} dinastia - Diccionario de datos con las dinastías encontradas
-   */
-  function getDinastia(id) {
-    let dinastia = "";
-
-    $.ajax({
-      url: '{% url "get_dinastia" %}',
-      data: {
-        id: id,
-      },
-      cache: false,
-      async: false,
-      success: function (data) {
-        if (data) {
-          dinastia = data;
-        }
-      },
-    });
-
-    return dinastia;
-  }
-
-  /**
-   * Obtiene los cargos a partir de una lista de IDs de personas
-   * Devuelve un diccionario de dato con formato: {personaID: nombreCargo}
-   * @param {Array} id - Lista de IDs
-   * @return {Json} cargos - Diccionario de datos con la relación cargo - persona
-   */
-  function getCargos(id) {
-    let cargos = "";
-
-    $.ajax({
-      url: '{% url "get_cargos" %}',
-      data: {
-        id: id,
-      },
-      cache: false,
-      async: false,
-      success: function (data) {
-        if (data) {
-          cargos = data;
-        }
-      },
-    });
-
-    return cargos;
-  }
+<script src="{% static 'js/ayuda_busqueda.js' %}">
+  var url_personas = "{% url 'get_personas' %}";
+  console.log(url_personas);
 </script>
 
 {% endblock %}

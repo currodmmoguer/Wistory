@@ -88,3 +88,7 @@
   border: 2px solid green !important;
   font-weight: bold;
 }
+
+.modal_select {
+  width: 100%;
+}
